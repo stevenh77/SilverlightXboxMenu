@@ -47,6 +47,12 @@
         <Setter Property="FontSize" Value="24" />
         <Setter Property="Margin" Value="50,0,0,0" />
     </Style>
+    <Style x:Key="SelectedMenuTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource ForegroundSelectedTextBrush}" />
+        <Setter Property="FontFamily" Value="/SilverlightXboxMenu;component/Fonts/Fonts.zip#Segoe UI Light" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="Margin" Value="50,0,0,0" />
+    </Style>
     <Style x:Key="ButtonsStackPanelStyle" TargetType="StackPanel">
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="Orientation" Value="Horizontal" />
@@ -169,6 +175,73 @@
                             </Grid>
                         </Border>
                     </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="MenuHeaderRadioButtonStyle" TargetType="controls:MenuHeaderRadioButton">
+        <Setter Property="Background" Value="#FF448DCA" />
+        <Setter Property="Foreground" Value="#FF000000" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Top" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver" />
+                                <VisualState x:Name="Pressed" />
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="CheckStates">
+                                <VisualState x:Name="Checked">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="MenuHeaderText"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="0" />
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="SelectedMenuHeaderText"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unchecked">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="MenuHeaderText"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1" />
+                                        <DoubleAnimation Duration="0"
+                                                         Storyboard.TargetName="SelectedMenuHeaderText"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="0" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Focused" />
+                                <VisualState x:Name="Unfocused" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <TextBlock x:Name="MenuHeaderText"
+                                   Margin="{TemplateBinding Padding}"
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                   Style="{StaticResource MenuTextBlockStyle}"
+                                   Text="{Binding DisplayText,
+                                                  RelativeSource={RelativeSource TemplatedParent}}" />
+                        <TextBlock x:Name="SelectedMenuHeaderText"
+                                   Margin="{TemplateBinding Padding}"
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                   Opacity="0"
+                                   Style="{StaticResource SelectedMenuTextBlockStyle}"
+                                   Text="{Binding DisplayText,
+                                                  RelativeSource={RelativeSource TemplatedParent}}" />
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
