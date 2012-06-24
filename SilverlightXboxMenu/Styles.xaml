@@ -6,12 +6,16 @@
                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     mc:Ignorable="d">
+    <controls:MenuHeaderRadioButton x:Key="MenuHeaderRadioButtonDataSource" d:IsDataSource="True" />
 
     <!--  Brushes  -->
     <SolidColorBrush x:Key="ForegroundSelectedTextBrush" Color="Black" />
     <SolidColorBrush x:Key="ForegroundTextBrush" Color="#FF8D8D8D" />
     <SolidColorBrush x:Key="MetroGreenBrush" Color="#FF34BA36" />
     <SolidColorBrush x:Key="MetroWhiteBrush" Color="White" />
+    <SolidColorBrush x:Key="RedMetroBrush" Color="#FFE51400" />
+    <SolidColorBrush x:Key="BlueMetroBrush" Color="#FF1BA1E2" />
+    <SolidColorBrush x:Key="PurpleMetroBrush" Color="#FFA200FF"/>
     <LinearGradientBrush x:Key="BackgroundBrush" StartPoint="0.5,0" EndPoint="0.5,1">
         <GradientStop Offset="0.177" Color="#FFD3D6D6" />
         <GradientStop Offset="0.388" Color="#FFBBBDBD" />
@@ -24,9 +28,9 @@
 
     <!--  Primitive Control styles  -->
     <Style x:Key="ProfileStackPanelStyle" TargetType="StackPanel">
-        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="Orientation" Value="Horizontal" />
-        <Setter Property="Margin" Value="0,10,60,0" />
+        <Setter Property="Margin" Value="530,10,0,0" />
         <Setter Property="Width" Value="110" />
     </Style>
     <Style x:Key="ProfileTextBlockStyle" TargetType="TextBlock">
@@ -37,9 +41,10 @@
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <Style x:Key="MenuStackPanelStyle" TargetType="StackPanel">
-        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Width" Value="640" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="Orientation" Value="Horizontal" />
-        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
     <Style x:Key="MenuTextBlockStyle" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource ForegroundTextBrush}" />
@@ -182,12 +187,13 @@
     <Style x:Key="MenuHeaderRadioButtonStyle" TargetType="controls:MenuHeaderRadioButton">
         <Setter Property="Background" Value="#FF448DCA" />
         <Setter Property="Foreground" Value="#FF000000" />
+        <Setter Property="Margin" Value="0,0,30,0" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Top" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="RadioButton">
-                    <Grid>
+                <ControlTemplate TargetType="controls:MenuHeaderRadioButton">
+                    <Grid DataContext="{Binding Source={StaticResource MenuHeaderRadioButtonDataSource}}">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal" />
@@ -230,17 +236,37 @@
                                    Margin="{TemplateBinding Padding}"
                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                   Cursor="Hand"
                                    Style="{StaticResource MenuTextBlockStyle}"
                                    Text="{Binding DisplayText,
-                                                  RelativeSource={RelativeSource TemplatedParent}}" />
+                                                  RelativeSource={RelativeSource TemplatedParent}}">
+                            <!--
+                                <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseEnter">
+                                Need to work out how to set the target object to parent
+                                <ei:ChangePropertyAction PropertyName="IsChecked" Value="True" />
+                                </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            -->
+                        </TextBlock>
                         <TextBlock x:Name="SelectedMenuHeaderText"
                                    Margin="{TemplateBinding Padding}"
                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                   Cursor="Hand"
                                    Opacity="0"
                                    Style="{StaticResource SelectedMenuTextBlockStyle}"
                                    Text="{Binding DisplayText,
-                                                  RelativeSource={RelativeSource TemplatedParent}}" />
+                                                  RelativeSource={RelativeSource TemplatedParent}}">
+                            <!--
+                                <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseEnter">
+                                Need to work out how to set the target object to parent
+                                <ei:ChangePropertyAction PropertyName="IsChecked" Value="True" />
+                                </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            -->
+                        </TextBlock>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

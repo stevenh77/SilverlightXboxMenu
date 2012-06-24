@@ -1,16 +1,63 @@
-﻿<UserControl
+﻿<UserControl x:Class="SilverlightXboxMenu.MainPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:c="clr-namespace:SilverlightXboxMenu.Controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" x:Class="SilverlightXboxMenu.MainPage"
-             Width="640"
-             Height="500"
+             Width="3700"
              mc:Ignorable="d">
 
     <Grid x:Name="LayoutRoot" Background="{StaticResource BackgroundBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="MenuPositions">
+                <VisualStateGroup.Transitions>
+                    <VisualTransition GeneratedDuration="0:0:0.6">
+                        <VisualTransition.GeneratedEasingFunction>
+                            <CubicEase EasingMode="EaseInOut" />
+                        </VisualTransition.GeneratedEasingFunction>
+                    </VisualTransition>
+                </VisualStateGroup.Transitions>
+                <VisualState x:Name="Bing" />
+                <VisualState x:Name="Home">
+                    <Storyboard>
+                        <DoubleAnimation d:IsOptimized="True"
+                                         Duration="0"
+                                         Storyboard.TargetName="MenuContainer"
+                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
+                                         To="-640" />
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Social">
+                    <Storyboard>
+                        <DoubleAnimation d:IsOptimized="True"
+                                         Duration="0"
+                                         Storyboard.TargetName="MenuContainer"
+                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
+                                         To="-1280" />
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Videos">
+                    <Storyboard>
+                        <DoubleAnimation d:IsOptimized="True"
+                                         Duration="0"
+                                         Storyboard.TargetName="MenuContainer"
+                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
+                                         To="-1940" />
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Settings">
+                    <Storyboard>
+                        <DoubleAnimation d:IsOptimized="True"
+                                         Duration="0"
+                                         Storyboard.TargetName="MenuContainer"
+                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)"
+                                         To="-2580" />
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
             <RowDefinition Height="45" />
             <RowDefinition Height="65" />
@@ -19,7 +66,15 @@
             <RowDefinition Height="20" />
             <RowDefinition Height="35" />
         </Grid.RowDefinitions>
-        <StackPanel x:Name="ProfileStackPanel" Style="{StaticResource ProfileStackPanelStyle}">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="640" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel x:Name="ProfileStackPanel"
+                    Grid.Column="0"
+                    Style="{StaticResource ProfileStackPanelStyle}">
             <TextBlock x:Name="ProfileNameTextBlock"
                        Style="{StaticResource ProfileTextBlockStyle}"
                        Text="stevieh77" />
@@ -27,120 +82,427 @@
                 <Image x:Name="ProfileImage" Source="Images/profile-snapshot.PNG" />
             </Viewbox>
         </StackPanel>
-        <StackPanel x:Name="MenuHeaderStackPanel_" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <c:MenuHeaderRadioButton x:Name="menuHeaderRadioButton" DisplayText="bing" Style="{StaticResource MenuHeaderRadioButtonStyle}" GroupName="MenuHeader" Margin="0,0,30,0">
-            	            	
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="MouseEnter">
-                                <ei:ChangePropertyAction PropertyName="IsChecked" Value="True" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-</c:MenuHeaderRadioButton>
-            <c:MenuHeaderRadioButton DisplayText="home" Style="{StaticResource MenuHeaderRadioButtonStyle}" GroupName="MenuHeader" Margin="0,0,30,0">
-            	
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="MouseEnter">
-                                <ei:ChangePropertyAction PropertyName="IsChecked" Value="True" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-</c:MenuHeaderRadioButton>
-            <c:MenuHeaderRadioButton DisplayText="social" IsChecked="true" Style="{StaticResource MenuHeaderRadioButtonStyle}" GroupName="MenuHeader" Margin="0,0,30,0">
-            	
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="MouseEnter">
-                                <ei:ChangePropertyAction PropertyName="IsChecked" Value="True" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-</c:MenuHeaderRadioButton>
-            <c:MenuHeaderRadioButton DisplayText="leaders" Style="{StaticResource MenuHeaderRadioButtonStyle}" GroupName="MenuHeader" Margin="0,0,30,0">
-            	            	
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="MouseEnter">
-                                <ei:ChangePropertyAction PropertyName="IsChecked" Value="True" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-</c:MenuHeaderRadioButton>
-            <c:MenuHeaderRadioButton DisplayText="settings" Style="{StaticResource MenuHeaderRadioButtonStyle}" GroupName="MenuHeader" Margin="0,0,0,0">            	
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="MouseEnter">
-                                <ei:ChangePropertyAction PropertyName="IsChecked" Value="True" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-</c:MenuHeaderRadioButton>
+
+        <StackPanel x:Name="MenuHeaderStackPanel"
+                    Grid.Row="1"
+                    Style="{StaticResource MenuStackPanelStyle}">
+            <c:MenuHeaderRadioButton x:Name="BingMenuHeader"
+                                     Margin="80,0,50,0"
+                                     DisplayText="bing"
+                                     GroupName="MenuHeader"
+                                     IsChecked="True"
+                                     Style="{StaticResource MenuHeaderRadioButtonStyle}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <ei:GoToStateAction StateName="Bing" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </c:MenuHeaderRadioButton>
+
+            <c:MenuHeaderRadioButton x:Name="HomeMenuHeader"
+                                     DisplayText="home"
+                                     GroupName="MenuHeader"
+                                     Style="{StaticResource MenuHeaderRadioButtonStyle}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <ei:GoToStateAction StateName="Home" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </c:MenuHeaderRadioButton>
+
+            <c:MenuHeaderRadioButton x:Name="SocialMenuHeader"
+                                     DisplayText="social"
+                                     GroupName="MenuHeader"
+                                     Style="{StaticResource MenuHeaderRadioButtonStyle}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <ei:GoToStateAction StateName="Social" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <c:MenuHeaderRadioButton.Projection>
+                    <PlaneProjection />
+                </c:MenuHeaderRadioButton.Projection>
+            </c:MenuHeaderRadioButton>
+
+            <c:MenuHeaderRadioButton x:Name="VideosMenuHeader"
+                                     DisplayText="videos"
+                                     GroupName="MenuHeader"
+                                     Style="{StaticResource MenuHeaderRadioButtonStyle}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <ei:GoToStateAction StateName="Videos" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </c:MenuHeaderRadioButton>
+
+            <c:MenuHeaderRadioButton x:Name="SettingsMenuHeader"
+                                     Margin="0"
+                                     DisplayText="settings"
+                                     GroupName="MenuHeader"
+                                     Style="{StaticResource MenuHeaderRadioButtonStyle}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <ei:GoToStateAction StateName="Settings" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </c:MenuHeaderRadioButton>
         </StackPanel>
 
-        <Grid x:Name="SelectedMenuContainer"
+        <Grid x:Name="MenuContainer"
               Grid.Row="3"
-              HorizontalAlignment="Center"
-              VerticalAlignment="Top">
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="120" />
-                <RowDefinition Height="120" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="20" />
-            </Grid.RowDefinitions>
+              Grid.ColumnSpan="2"
+              Width="3700"
+              RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <CompositeTransform />
+            </Grid.RenderTransform>
+            <Grid.Projection>
+                <PlaneProjection />
+            </Grid.Projection>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="640" />
+                <ColumnDefinition Width="640" />
+                <ColumnDefinition Width="640" />
+                <ColumnDefinition Width="640" />
+                <ColumnDefinition Width="640" />
             </Grid.ColumnDefinitions>
-            <c:MetroTile x:Name="FriendsTile"
-                         Grid.Row="0"
-                         Grid.Column="0"
-                         Width="120"
-                         Height="120"
-                         DisplayIcon="Images/Friends.png"
-                         DisplayText="Friends" />
-            <c:MetroTile x:Name="AppsTile"
-                         Grid.Row="1"
-                         Grid.Column="0"
-                         Width="120"
-                         Height="120"
-                         DisplayIcon="Images/Apps.png"
-                         DisplayText="Apps" />
-            <c:MetroTile x:Name="BigTile"
-                         Grid.Row="0"
-                         Grid.RowSpan="2"
-                         Grid.Column="1"
-                         Grid.ColumnSpan="2"
-                         Width="240"
-                         Height="240"
-                         DisplayIcon="Images/profile-man-2.png"
-                         DisplayText="Profile" />
-            <c:MetroTile x:Name="OptionsTile"
-                         Grid.Row="0"
-                         Grid.Column="5"
-                         Width="120"
-                         Height="120"
-                         DisplayIcon="Images/Options.png"
-                         DisplayText="Options" />
-            <c:MetroTile x:Name="SignOutTile"
-                         Grid.Row="1"
-                         Grid.Column="5"
-                         Width="120"
-                         Height="120"
-                         DisplayIcon="Images/Signout.png"
-                         DisplayText="Sign Out" />
-            <Rectangle Grid.Row="4"
-                       Grid.ColumnSpan="7"
-                       Width="490"
-                       Height="100"
-                       Margin="0"
-                       Fill="Black"
-                       Opacity="0.1"
-                       RenderTransformOrigin="0.5,0.5"
-                       Stroke="Black"
-                       StrokeThickness="0">
-                <Rectangle.Projection>
-                    <PlaneProjection RotationX="111" />
-                </Rectangle.Projection>
-                <Rectangle.Effect>
-                    <BlurEffect Radius="80" />
-                </Rectangle.Effect>
-            </Rectangle>
 
+            <Grid x:Name="BingMenuContainer"
+                  Grid.Column="0"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Top">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="240" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="20" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="480" />
+                </Grid.ColumnDefinitions>
+
+                <Image x:Name="BingImage" Source="/Images/bing.PNG" Stretch="UniformToFill" />
+
+                <Rectangle Grid.Row="4"
+                           Grid.ColumnSpan="7"
+                           Width="490"
+                           Height="100"
+                           Margin="0"
+                           Fill="Black"
+                           Opacity="0.1"
+                           RenderTransformOrigin="0.5,0.5"
+                           Stroke="Black"
+                           StrokeThickness="0">
+                    <Rectangle.Projection>
+                        <PlaneProjection RotationX="111" />
+                    </Rectangle.Projection>
+                    <Rectangle.Effect>
+                        <BlurEffect Radius="80" />
+                    </Rectangle.Effect>
+                </Rectangle>
+            </Grid>
+            <Grid x:Name="HomeMenuContainer"
+                  Grid.Column="1"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Top">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="120" />
+                    <RowDefinition Height="120" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="20" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="120" />
+                </Grid.ColumnDefinitions>
+
+                <c:MetroTile Grid.Row="0"
+                             Grid.Column="0"
+                             Width="120"
+                             Height="120"
+                             Background="{StaticResource BlueMetroBrush}"
+                             DisplayIcon="Images/Microscope.png"
+                             DisplayText="Home #1" />
+                <c:MetroTile Grid.Row="1"
+                             Grid.Column="0"
+                             Width="120"
+                             Height="120"
+                             Background="{StaticResource BlueMetroBrush}"
+                             DisplayIcon="Images/Audio.png"
+                             DisplayText="Home #2" />
+                <c:MetroTile Grid.Row="0"
+                             Grid.Column="1"
+                             Width="120"
+                             Height="120"
+                             Background="{StaticResource BlueMetroBrush}"
+                             DisplayIcon="Images/Positive.png"
+                             DisplayText="Home #3" />
+                <c:MetroTile Grid.Row="1"
+                             Grid.Column="1"
+                             Width="120"
+                             Height="120"
+                             Background="{StaticResource BlueMetroBrush}"
+                             DisplayIcon="Images/Print.png"
+                             DisplayText="Home #4" />
+                <c:MetroTile Grid.Row="0"
+                             Grid.Column="2"
+                             Width="120"
+                             Height="120"
+                             Background="{StaticResource BlueMetroBrush}"
+                             DisplayIcon="Images/Picture.png"
+                             DisplayText="Home #5" />
+                <c:MetroTile Grid.Row="1"
+                             Grid.Column="2"
+                             Width="120"
+                             Height="120"
+                             Background="{StaticResource BlueMetroBrush}"
+                             DisplayIcon="Images/Favorites.png"
+                             DisplayText="Home #6" />
+                <c:MetroTile Grid.Row="0"
+                             Grid.Column="3"
+                             Width="120"
+                             Height="120"
+                             Background="{StaticResource BlueMetroBrush}"
+                             DisplayIcon="Images/Options.png"
+                             DisplayText="Home #7" />
+                <c:MetroTile Grid.Row="1"
+                             Grid.Column="3"
+                             Width="120"
+                             Height="120"
+                             Background="{StaticResource BlueMetroBrush}"
+                             DisplayIcon="Images/Disc.png"
+                             DisplayText="Home #8" />
+
+                <Rectangle Grid.Row="4"
+                           Grid.ColumnSpan="7"
+                           Width="490"
+                           Height="100"
+                           Margin="0"
+                           Fill="Black"
+                           Opacity="0.1"
+                           RenderTransformOrigin="0.5,0.5"
+                           Stroke="Black"
+                           StrokeThickness="0">
+                    <Rectangle.Projection>
+                        <PlaneProjection RotationX="111" />
+                    </Rectangle.Projection>
+                    <Rectangle.Effect>
+                        <BlurEffect Radius="80" />
+                    </Rectangle.Effect>
+                </Rectangle>
+            </Grid>
+            <Grid x:Name="SocialMenuContainer"
+                  Grid.Column="2"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Top">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="120" />
+                    <RowDefinition Height="120" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="20" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="120" />
+                </Grid.ColumnDefinitions>
+
+                <c:MetroTile x:Name="FriendsTile"
+                             Grid.Row="0"
+                             Grid.Column="0"
+                             Width="120"
+                             Height="120"
+                             DisplayIcon="Images/Friends.png"
+                             DisplayText="Friends" />
+                <c:MetroTile x:Name="AppsTile"
+                             Grid.Row="1"
+                             Grid.Column="0"
+                             Width="120"
+                             Height="120"
+                             DisplayIcon="Images/Apps.png"
+                             DisplayText="Apps" />
+                <c:MetroTile x:Name="BigTile"
+                             Grid.Row="0"
+                             Grid.RowSpan="2"
+                             Grid.Column="1"
+                             Grid.ColumnSpan="2"
+                             Width="240"
+                             Height="240"
+                             DisplayIcon="Images/profile-man-2.png"
+                             DisplayText="Profile" />
+                <c:MetroTile x:Name="OptionsTile"
+                             Grid.Row="0"
+                             Grid.Column="5"
+                             Width="120"
+                             Height="120"
+                             DisplayIcon="Images/Options.png"
+                             DisplayText="Options" />
+                <c:MetroTile x:Name="SignOutTile"
+                             Grid.Row="1"
+                             Grid.Column="5"
+                             Width="120"
+                             Height="120"
+                             DisplayIcon="Images/Signout.png"
+                             DisplayText="Sign Out" />
+                <Rectangle Grid.Row="4"
+                           Grid.ColumnSpan="7"
+                           Width="490"
+                           Height="100"
+                           Margin="0"
+                           Fill="Black"
+                           Opacity="0.1"
+                           RenderTransformOrigin="0.5,0.5"
+                           Stroke="Black"
+                           StrokeThickness="0">
+                    <Rectangle.Projection>
+                        <PlaneProjection RotationX="111" />
+                    </Rectangle.Projection>
+                    <Rectangle.Effect>
+                        <BlurEffect Radius="80" />
+                    </Rectangle.Effect>
+                </Rectangle>
+
+            </Grid>
+            <Grid x:Name="VideoMenuContainer"
+                  Grid.Column="3"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Top">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="240" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="20" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="240" />
+                    <ColumnDefinition Width="240" />
+                </Grid.ColumnDefinitions>
+
+                <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="Images/rockofages.PNG" Stretch="UniformToFill" Margin="0,0,2,0"/>
+                <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="/Images/snowwhite.PNG" Grid.Column="2" Stretch="UniformToFill" Margin="2,0,0,0"/>
+
+                <Rectangle Grid.Row="4"
+                           Grid.ColumnSpan="7"
+                           Width="490"
+                           Height="100"
+                           Margin="0"
+                           Fill="Black"
+                           Opacity="0.1"
+                           RenderTransformOrigin="0.5,0.5"
+                           Stroke="Black"
+                           StrokeThickness="0">
+                    <Rectangle.Projection>
+                        <PlaneProjection RotationX="111" />
+                    </Rectangle.Projection>
+                    <Rectangle.Effect>
+                        <BlurEffect Radius="80" />
+                    </Rectangle.Effect>
+                </Rectangle>
+
+            </Grid>
+            <Grid x:Name="SettingsMenuContainer"
+                  Grid.Column="4"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Top">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="120" />
+                    <RowDefinition Height="120" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="20" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="120" />
+                </Grid.ColumnDefinitions>
+
+                <c:MetroTile Grid.Row="0"
+                             Grid.Column="0"
+                             Width="120"
+                             Height="120"
+                             Background="{StaticResource RedMetroBrush}"
+                             DisplayIcon="Images/Car.png"
+                             DisplayText="Settings #1" />
+                <c:MetroTile Grid.Row="1"
+                             Grid.Column="0"
+                             Width="120"
+                             Height="120"
+                             Background="{StaticResource RedMetroBrush}"
+                             DisplayIcon="Images/Clock.png"
+                             DisplayText="Settings #2" />
+                <c:MetroTile Grid.Row="0"
+                             Grid.Column="1"
+                             Width="120"
+                             Height="120"
+                             Background="{StaticResource RedMetroBrush}"
+                             DisplayIcon="Images/Delete.png"
+                             DisplayText="Settings #3" />
+                <c:MetroTile Grid.Row="1"
+                             Grid.Column="1"
+                             Width="120"
+                             Height="120"
+                             Background="{StaticResource RedMetroBrush}"
+                             DisplayIcon="Images/Flight.png"
+                             DisplayText="Settings #4" />
+                <c:MetroTile Grid.Row="0"
+                             Grid.Column="2"
+                             Width="120"
+                             Height="120"
+                             Background="{StaticResource RedMetroBrush}"
+                             DisplayIcon="Images/Heart.png"
+                             DisplayText="Settings #5" />
+                <c:MetroTile Grid.Row="1"
+                             Grid.Column="2"
+                             Width="120"
+                             Height="120"
+                             Background="{StaticResource RedMetroBrush}"
+                             DisplayIcon="Images/Lab.png"
+                             DisplayText="Settings #6" />
+                <c:MetroTile Grid.Row="0"
+                             Grid.Column="3"
+                             Width="120"
+                             Height="120"
+                             Background="{StaticResource RedMetroBrush}"
+                             DisplayIcon="Images/Ambulance.png"
+                             DisplayText="Settings #7" />
+                <c:MetroTile Grid.Row="1"
+                             Grid.Column="3"
+                             Width="120"
+                             Height="120"
+                             Background="{StaticResource RedMetroBrush}"
+                             DisplayIcon="Images/Video.png"
+                             DisplayText="Settings #8" />
+
+                <Rectangle Grid.Row="4"
+                           Grid.ColumnSpan="7"
+                           Width="490"
+                           Height="100"
+                           Margin="0"
+                           Fill="Black"
+                           Opacity="0.1"
+                           RenderTransformOrigin="0.5,0.5"
+                           Stroke="Black"
+                           StrokeThickness="0">
+                    <Rectangle.Projection>
+                        <PlaneProjection RotationX="111" />
+                    </Rectangle.Projection>
+                    <Rectangle.Effect>
+                        <BlurEffect Radius="80" />
+                    </Rectangle.Effect>
+                </Rectangle>
+            </Grid>
         </Grid>
 
         <StackPanel x:Name="ButtonStackPanel"
